@@ -1,5 +1,8 @@
 #include <string>
 #include "MergeSort.h"
+#include <iostream>
+
+using namespace std;
 
 void MergeSort::run_sort_algorithm()
     throw (string)
@@ -23,13 +26,49 @@ void MergeSort::run_sort_algorithm()
 
 void MergeSort::mergesort(LinkedList& list)
 {
-    /***** Complete this function. *****/
+//	cerr << "merge sort list:";
+//	list.print();
+	if (list.get_size() > 1) {
+		LinkedList list1, list2;
+		list.split(list1, list2);
+//		cerr << "split list1: ";
+//		list1.print();
+//		cerr << "split list2: ";
+//		list2.print();
+		mergesort(list1);
+		mergesort(list2);
+		list.reset();
+		merge(list, list1, list2);
+	}
+//	cerr << "sort result: ";
+//	list.print();
 }
 
 void MergeSort::merge(LinkedList& list,
                       LinkedList& sublist1, LinkedList& sublist2)
 {
-    /***** Complete this function. *****/
+//	cerr << "merge list1: ";
+//	sublist1.print();
+//	cerr << "merge list2: ";
+//	sublist2.print();
+	while (sublist1.get_size() > 0 && sublist2.get_size() > 0) {
+		compare_count++;
+		move_count++;
+		if (sublist1.get_head()->element < sublist2.get_head()->element)
+			list.add(sublist1.remove_head());
+		else
+			list.add(sublist2.remove_head());
+	}
+	if (sublist1.get_size() > 0) {
+		list.concatenate(sublist1);
+		move_count++;
+	}
+	if (sublist2.get_size() > 0) {
+		list.concatenate(sublist2);
+		move_count++;
+	}
+//	cerr << "merge result: ";
+//	list.print();
 }
 
 void MergeSort::clear() { data.clear(); }

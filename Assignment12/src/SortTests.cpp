@@ -21,7 +21,8 @@
 #include "ShellSortOptimal.h"
 #include "QuickSortSuboptimal.h"
 #include "QuickSortOptimal.h"
-//#include "MergeSort.h"
+#include "Sorter.h"
+#include "MergeSort.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -66,8 +67,8 @@ int main()
         new ShellSortSuboptimal("Shellsort suboptimal"),
         new ShellSortOptimal("Shellsort optimal"),
         new QuickSortSuboptimalRight("Quicksort suboptimal"),
-        new QuickSortOptimal("Quicksort optimal")//,
-//        new MergeSort("Mergesort"),
+        new QuickSortOptimal("Quicksort optimal"),
+        new MergeSort("Mergesort")
     };
 
     // Data generators.

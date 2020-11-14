@@ -59,17 +59,42 @@ void LinkedList::print() const
 {
     for (Node *ptr = head; ptr != nullptr; ptr = ptr->next)
     {
-        cout << " " << ptr->element.get_value();
+        cerr << " " << ptr->element.get_value();
     }
-    cout << endl;
+    cerr << endl;
 }
 
 void LinkedList::split(LinkedList& list1, LinkedList& list2)
 {
-    /***** Complete this function. *****/
+	// size == 0
+	if (get_size() == 0)
+		return;
+	// size == 1
+	if (get_size() == 1) {
+		list1.size = 1;
+		list1.head = head;
+		list1.tail = tail;
+		return;
+	}
+	// size > 1
+	list1.size = get_size() / 2;
+	list2.size = get_size() - get_size() / 2;
+	list1.head = head;
+	// forward the pointer
+	Node* p = head;
+	for (int i = 0; i < get_size() / 2; i++) {
+		list1.tail = p;
+		p = p->next;
+	}
+	list1.tail->next = nullptr;
+	list2.head = p;
+	list2.tail = tail;
+	list2.tail->next = nullptr;
 }
 
 void LinkedList::concatenate(LinkedList& other_list)
 {
-    /***** Complete this function. *****/
+	tail->next = other_list.head;
+	tail = other_list.tail;
+	size += other_list.size;
 }

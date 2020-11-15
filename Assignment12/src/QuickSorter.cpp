@@ -34,7 +34,7 @@ int QuickSorter::partition(const int left, const int right, const Element& pivot
 
 
 	int i = left;
-    for (int j = left; j <= right; j++){
+    for (int j = left + 1; j <= right; j++){
     	compare_count++;
     	if (data[j] < pivot) {
     		i++;
